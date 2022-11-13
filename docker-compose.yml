@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  posts-app-postgres:
+    image: "postgres:14.3"
+    container_name: "posts-app-postgres"
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=postsappdb

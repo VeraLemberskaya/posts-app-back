@@ -1,11 +1,17 @@
-import { Router } from "express";
+const router = require("express").Router();
 
-import { login, register } from "../controllers/authController";
+const { login, register, refresh } = require("../controllers/authController");
+const {
+  registerSchema,
+  loginSchema,
+  refreshSchema,
+} = require("../validation/authValidator");
+const validateRequest = require("../middleware/validateRequest");
 
-const router = new Router();
+router.post("/register", validateRequest(registerSchema, "body"), register);
 
-router.post("/register", register);
+router.post("/login", validateRequest(loginSchema, "body"), login);
 
-router.post("/login", login);
+router.post("/refresh", validateRequest(refreshSchema, "body"), refresh);
 
-export default router;
+module.exports = router;

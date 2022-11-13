@@ -1,15 +1,15 @@
-import * as dotenv from "dotenv";
-dotenv.config();
-import express from "express";
+require("dotenv").config();
+const express = require("express");
+const bodyParser = require("body-parser");
 
-import router from "./app/router";
+const router = require("./app/router");
 
 const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-app.use(express.json());
-app.unsubscribe("/api", router);
+app.use(bodyParser.json());
+app.use("/api", router);
 
 const start = () => {
   try {
